@@ -12,7 +12,7 @@ local blind = {
     mult = 2,
     boss = {min = 5},
     boss_colour = HEX('5F8D9D'),
-    debuff_hand = function(self, cards, hand, handname, check)
+    press_play = function(self)
         if self.disabled then return end
         self.triggered = false
         -- handname refers to current hand
@@ -21,10 +21,10 @@ local blind = {
             -- prior function idea
             -- first played hand swaps level with highest leveled hand or highest played hand level
             --highest_hand = math.max(G.GAME.hands[1].level, G.GAME.hands[2].level, G.GAME.hands[3].level, G.GAME.hands[4].level, G.GAME.hands[5].level, G.GAME.hands[6].level, G.GAME.hands[7].level, G.GAME.hands[8].level, G.GAME.hands[9].level, G.GAME.hands[10].level, G.GAME.hands[11].level, G.GAME.hands[12].level)
-            if G.GAME.hands[handname].level > 1 then
+            if G.GAME.hands[G.GAME.current_round.current_hand.handname].level > 1 then
                 self.triggered = true
-                ease_dollars(hand.level)
-                level_up_hand(G.hand, handname, nil, -hand.level+1)
+                ease_dollars(G.GAME.hands[G.GAME.current_round.current_hand.handname].level - 1)
+                level_up_hand(G.hand, G.GAME.current_round.current_hand.handname, nil, -G.GAME.hands[G.GAME.current_round.current_hand.handname].level + 1)
                 G.GAME.blind:wiggle()
             end
         end
