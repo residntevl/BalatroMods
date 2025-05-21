@@ -11,7 +11,7 @@ local blind = {
     dollars = 3,
     mult = 2.5,
     boss = {min = 6},
-    boss_colour = HEX('DB96A3'),
+    boss_colour = HEX('3D7675'),
     press_play = function(self)
         if self.disabled then return end
         if G.GAME.current_round.hands_played == 0 then
